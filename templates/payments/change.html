@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<style media="screen">
+
+
+#stripeBtnLabel {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 16px;
+	font-variant: normal;
+	padding: 0;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+}
+
+#stripeBtn {
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	text-decoration: none;
+	color: #fff;
+	background: #32325d;
+	white-space: nowrap;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 14px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+	border-radius: 4px;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.025em;
+	text-decoration: none;
+	-webkit-transition: all 150ms ease;
+	transition: all 150ms ease;
+	float: left;
+	margin-left: 80px;
+	margin-top: 18px;
+}
+
+button:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
+	background-color: #43458b;
+}
+
+#stripe-form {
+	padding: 30px;
+	height: 120px;
+}
+
+label {
+	font-weight: 500;
+	font-size: 14px;
+	display: block;
+	margin-bottom: 8px;
+}
+
+#card-errors {
+	height: 20px;
+	padding: 4px 0;
+	color: #fa755a;
+}
+
+.stripe-form-row {
+	width: 100%;
+	float: left;
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+	box-sizing: border-box;
+
+	height: 40px;
+
+	padding: 10px 12px;
+
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: white;
+
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+	border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+}
+</style>
+{% endblock extra_head %}
+
+
+{% block content %}
+<div class="container">
+	<h2 class="card-title text-center">Change Plans</h2>
+  	<div class="row login">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto features">
+			<h2 class="title-features">Plan Features</h2>
+			<hr>
+			<ul class="fa-ul">
+				<li><span class="fa-li"><i class="fas fa-check"></i></span>Single User</li>
+				<li><span class="fa-li"><i class="fas fa-check"></i></span>5GB Storage</li>
+				<li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
+				<li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
+				<li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Unlimited Private Projects</li>
+				<li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Dedicated Phone Support</li>
+				<li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
+				<li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
+			</ul>
+		</div>
+
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto change-col">
+				<div class="card card-signin my-5 change">
+					<div class="card-body">
+						<div class="flex justify-center mx-auto">
+							<div class="py-3">
+								<h3 class="text-xl text-center text-gray-500">
+									Change to: the {{ pricing_tier.name }} membership
+								</h3>
+								<p class="text-3xl text-center text-black">
+									{% if pricing_tier.currency == "usd" %}
+									${{ pricing_tier.price }}/mo
+									{% else %}
+									€{{ pricing_tier.price }}/mo
+									{% endif %}
+								</p>
+								<div class="mt-3">
+									<div class="col-12 Card text-center">
+										<h2 class="h3 mb-3 text-black">Select Payment Method</h2>
+										<!-- <ul style="list-style-type:none">
+											<li></li>
+											<li></li>
+										</ul> -->
+											<label><input type="radio" value="Stripe" name="showHide">Stripe</label>
+											<label><input type="radio" value="Paypal" name="showHide">Paypal</label>
+											<div class="box Paypal" style="display:none"><h2>You have selected Paypal</h2></div>
+											<div class="box Stripe" style="display:none"> <!-- Start Stripe Hide Form -->
+												<script src="https://js.stripe.com/v3/"></script>
+													<form id="change-form">
+														{% csrf_token %}
+														<div class="stripe-form-row">
+															<label for="card-element" id='stripeBtnLabel'>
+																Credit or debit card
+															</label>
+															<div id="card-element" class="StripeElement StripeElement--empty">
+																<div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; 
+																display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+																<iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame5" allowpaymentrequest="true" 
+																src="https://js.stripe.com/v3/elements-inner-card-06bbf4872ef26f755cabcdae4075e537.html#style[base][color]=%2332325d&amp;
+																style[base][fontFamily]=%22Helvetica+Neue%22%2C+Helvetica%2C+sans-serif&amp;style[base][fontSmoothing]=antialiased&amp;
+																style[base][fontSize]=16px&amp;style[base][::placeholder][color]=%23aab7c4&amp;style[invalid][color]=%23fa755a&amp;
+																style[invalid][iconColor]=%23fa755a&amp;componentName=card&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_TYooMQauvdEDq54NiTphI7jx&amp;
+																origin=https%3A%2F%2Fstripe.com&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fstripe-js&amp;controllerId=__privateStripeController1" 
+																title="Secure payment input frame" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; 
+																min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; height: 19.2px;">
+																</iframe><input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" 
+																style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; 
+																left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; 
+																pointer-events: none !important; font-size: 16px !important;"></div>
+																<!-- Used to display form errors. -->
+																<div id="card-errors" role="alert"></div>
+															</div>
+														</div>
+														<button id="stripeBtn">Submit Payment</button>
+													</form>
+											</div><!-- End Stripe Hide Form -->
+										<!-- </div>	 -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+  	</div>
+</div>
+
+{% include 'pages/footer.html' %}
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+function updateSubscription(priceId, subscriptionId) {
+  return fetch("{% url 'payments:change-subscription' %}", {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/json',
+      'X-CSRFToken': csrftoken
+    },
+    body: JSON.stringify({
+      priceId: "{{ pricing_tier.stripe_price_id }}",
+    }),
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(response => {
+      window.location.href = "{% url 'users:subscription' request.user.username %}"
+      return response;
+    });
+}
+
+// function changeLoadingState(isLoading) {
+//   if (isLoading) {
+//     document.querySelector('#button-text').classList.add('hidden');
+//     document.querySelector('#spinner').classList.remove('hidden');
+//     document.querySelector('#change-form button').disabled = true;
+//   } else {
+//     document.querySelector('#button-text').classList.remove('hidden');
+//     document.querySelector('#spinner').classList.add('hidden');
+//     document.querySelector('#change-form button').disabled = false;
+//   }
+// }
+
+var form = document.getElementById('change-form');
+
+form.addEventListener('submit', function (ev) {
+  ev.preventDefault();
+//   changeLoadingState(true);
+  updateSubscription()
+});
+
+$(document).ready(function(){
+	$('input[type="radio"]').click (function(){
+		var inputValue = $(this).attr("value");
+		var targetBox =$("."+ inputValue);
+		$(".box").not(targetBox).hide();
+		$(targetBox).show();
+	});
+});
+</script>
+{% endblock javascript %}

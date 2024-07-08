@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div>
+        {% if object == request.user %}
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+                    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-mail</a>
+                    <a class="btn btn-primary" href="{% url 'users:subscription' request.user.username %}" role="button">My subscription</a>
+                </div>
+            </div>
+
+        {% endif %}	
+
+        <h2>Package: {{ user.subscription.pricing.name }}</h2>
+
+        <h3>Status: {{ user.subscription.status }}</h3>
+        {% if user.subscription.status != 'canceled' %}
+            <form method="post" class="py-3 mt-3" action="{% url 'users:cancel-subscription' request.user.username %}">
+                {% csrf_token %}
+                {{ form }}
+                <button  class="btn btn-primary"  type="submit">
+                    Cancel Subscription
+                </button>
+            </form>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock content %}

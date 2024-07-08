@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+  </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ carousel_image1.img.url }}" class="d-block w-100" alt="...">
+        {% if carousel_image1.caption_title and carousel_image1.caption_content and carousel_image1.caption_button %}
+          <div class="carousel-caption d-none d-md-block">
+            <h1>{{ carousel_image1.caption_title }}</h1>
+            <h3>{{ carousel_image1.caption_content }}</h3>
+            <!-- <h3>a pharetra augue mollis interdum.</h3> -->
+            <a href="{{ carousel_image1.caption_button }}"><button type="button" class="btn btn-outline-secondary btn-lg">get start</button></a>
+          </div>
+        {% endif %}
+      </div>
+      <div class="carousel-item">
+        <img src="{{ carousel_image2.img.url }}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ carousel_image3.img.url }}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+</div>
+
+<!-- Start Section 1 -->
+<div class="container-fluid">
+  <div class="row valores padding">
+    <div class="col-md-4">
+      <h3 class="text-center">Etherun</h3>
+      <div class="heading-underline"></div>
+      <blockquote>
+        <i class="fa fa-quote-left" aria-hidden="true"></i>
+        Etherun martes malis paremis elis tatus samen siri al tamen eres, tarin karen malemium
+        palserin enamenom varin lenin asule
+      </blockquote>
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-center">Roselin</h3>
+      <div class="heading-underline"></div>
+      <blockquote>
+        <i class="fa fa-quote-left" aria-hidden="true"></i>
+        Roselin fares malgun, etis paremis jalen, etemon talin damelon. Etimus falin jelinomen 
+        parelemun atominer salme
+      </blockquote>
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-center">Doran</h3>
+      <div class="heading-underline"></div>
+      <blockquote>
+        <i class="fa fa-quote-left" aria-hidden="true"></i>
+        Doran, eminer faltorem equietamus al sular dolorin samen tatis. Cusamer falis eremus, etis 
+        karen vazil.
+      </blockquote>
+    </div>
+  </div>
+  <hr class="my-4">
+</div>
+<!-- End Section 1 -->
+
+<!-- Start Background Fixed Image -->
+<div id="fixed">	
+</div>
+<!-- End Background Fixed Image -->
+
+<!-- Start Section 2 -->
+<div class="container-fluid padding">
+	<div class="row text-center padding">
+		<div class="col-xs-12 col-sm-6 col-md-4 padding">
+      <i class="fa fa-line-chart fa-3x" aria-hidden="true"></i>
+			<h3>Quality</h3>
+      <p>Built with the leates version of HTML, HTML5, teris asterum campen mellis eberatun taram</p>
+
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 padding">
+      <i class="fa fa-child fa-3x" aria-hidden="true"></i>
+			<h3>For Everyone</h3>
+      <p>Built with the leates version of BOOTSTRAP, teris asterum campen mellis eberatun taram</p>
+
+		</div>
+		<div class="col-sm-12 col-md-4 padding">
+      <i class="fa fa-search-plus fa-3x" aria-hidden="true"></i>
+			<h3>Searching</h3>
+      <p>Built with the leates version of css3, teris asterum campen mellis eberatun taram</p>
+
+		</div>
+	</div>
+	<hr class="my-4">
+</div>
+<!-- End Section 2 -->
+
+<div class="col-12">
+  <h3 class="heading text-center">How we work</h3>
+  <div class="heading-underline"></div>
+</div>	
+
+<!-- Start Section 3 Jumbotron -->
+<div class="jumbotron"> <!-- Star Jumbotron-->
+  <div class="container-fluid p-0"><!-- Start Container Fluid -->
+
+      <div class="row rowone"> <!-- Start Firts Row -->
+          <div class="col-lg-4 order-lg-2 jumbotron-img">
+              <img src="{% static 'css/img/search.png' %}">
+          </div>
+          <div class="col-lg-8 order-lg-1 my-auto jumbotron-text"> 
+              <p>Ipsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamenIpsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamen</p>
+          </div>
+      </div>
+      <div class="row"> <!-- Start Firts Row -->
+          <div class="col-lg-4 jumbotron-img">
+              <img src="{% static 'css/img/how1.png' %}">
+          </div>
+          <div class="col-lg-8 my-auto  jumbotron-text"> 
+              <p>Ipsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamenIpsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamen</p>
+          </div>
+      </div>
+      <div class="row"> <!-- Start Firts Row -->
+          <div class="col-lg-4 order-lg-2 jumbotron-img">
+              <img src="{% static 'css/img/how2.png' %}">
+          </div>
+          <div class="col-lg-8 order-lg-1 my-auto jumbotron-text"> 
+              <p>Ipsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamenIpsum estem berish tellun akarin balgush esun
+              billish teris asterum campen mellis eberatun taram
+              aspam kalemanor belin terenacum selamen</p>
+          </div>
+      </div>
+
+  </div><!-- End Container FLuid-->
+</div> <!-- End Jumbotron-->
+<!-- End Section 3 Jumbotron -->
+
+<!-- Start Call TO Action Section -->
+<div class="jumbotron callto">
+	<div class="col-12 narrow text-center">
+		<!-- <h1>Texto Header 1</h1> -->
+		<p class="lead">Learn Bootstrap by creanting with this dummy text</p>
+    <a class="btn btn-secondary btn-md" href="#" target="_blank">Bootstrap Course</a>
+	</div>
+</div>
+
+
+<!-- End Call TO Action Section -->
+
+<!-- Star Pricing Section -->
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Pricing</h1>
+  <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+</div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+
+    {% for pricing in pricings %}
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">{{ pricing.name }}</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">${{ pricing.price }} <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            {% for feature in pricing.feature.all %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'payments:checkout' slug=pricing.slug %}"><button type="button" class="btn btn-lg btn-block btn-primary">{{ pricing.button_text }}</button></a>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+<!-- End Pricing Section -->
+
+<!--- Footer -->
+<!--- Footer -->
+<footer>
+	<div class="container-fluid text-center">
+		<div class="row text-center">
+			<div class="col-md-4">
+				<img src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg">
+				<hr class="light">
+				<p>555-555-5555</p>
+				<p>email@email.com</p>
+				<p>100 Street None</p>
+				<p>City, State, 00000</p>
+			</div>
+			<div class="col-md-4">
+				<hr class="light">
+				<h5>Our hours</h5>
+				<hr class="light">
+				<p>Monday 9am - 5pm</p>
+        <p>Saturday 10am - 4pm</p>
+        <p>Monday 9am - 5pm</p>
+				<p>Saturday 10am - 4pm</p>
+      </div>
+      <div class="col-md-4">
+				<hr class="light">
+				<h5>Services Area</h5>
+				<hr class="light">
+				<p>City, Zip Code</p>
+        <p>City, Zip Code</p>
+        <p>City, Zip Code</p>
+				<p>City, Zip Code</p>
+      </div>
+      
+      
+    </div>
+    <hr class="socket">
+    &copy; Davijhon Theme.
+	</div>
+</footer>
+<!--- Footer -->
+
+{% endblock content %}
